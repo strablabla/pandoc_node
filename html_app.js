@@ -67,10 +67,10 @@ var scroll_html_pos = 0 //
 var comment = false;
 
 String.prototype.format = function () {
-  var i = 0, args = arguments;
-  return this.replace(/{}/g, function () {
-    return typeof args[i] != 'undefined' ? args[i++] : '';
-  });
+    var i = 0, args = arguments;
+    return this.replace(/{}/g, function () {
+          return typeof args[i] != 'undefined' ? args[i++] : '';
+    });
 };
 
 io.sockets.on('connection', function (socket) {
@@ -88,7 +88,11 @@ io.sockets.on('connection', function (socket) {
       socket.on('return', function(new_text) {        // change html with textarea
             modify.modify_html_with_newtext(io, fs, util, new_text)
             //var code = 'pandoc -N --template=template.tex --variable mainfont="Palatino" --variable sansfont="Helvetica" --variable monofont="Menlo" --variable fontsize=12pt --variable version=2.0 views/main.txt --pdf-engine=pdflatex --toc -o example14.pdf'
-            var code = 'cd latex_templates/wen; pandoc -N  --template=wen_template.tex --variable mainfont="Palatino" --variable sansfont="Helvetica" --variable monofont="Menlo" --variable fontsize=12pt --variable version=2.0 ../../views/main.txt  --toc -o ../../views/result_pandoc.pdf'
+            var code = 'cd latex_templates/{}; pandoc -N  --template={}\
+                        --variable mainfont="Palatino" --variable sansfont="Helvetica" \
+                        --variable monofont="Menlo" --variable fontsize=12pt\
+                        --variable version=2.0 ../../views/main.txt  --toc\
+                        -o ../../views/result_pandoc.pdf'.format('wen', 'wen_template.tex')
             exec_code(code)
         }); // end socket.on return
 
