@@ -1,15 +1,34 @@
 
+---
+title: L'histoire ne fait que commencer
+author: Le bigre Dumpy
+date: 3 juin 2019
+abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce maximus nisi ligula. 
+---
+
 # Introduction
 
-## Petite phrase après.. 
+## Petite phrase après..
 
-bismuth est de retour.. avec toujours cet air ahuri qui vient de je ne sais où.. 
+bismuth est de retour.. avec toujours cet air ahuri qui vient de je ne sais où..
 
-## autre chapitre 
+## autre chapitre
 
-avoir voix au chapitre ou pas est extrêmement crucial.. 
+avoir voix au chapitre ou pas est extrêmement crucial..
 
-![image d'ours.. ](bear.jpg){ width=50% }
+J'ai vu le loup, le renard et la belette..
+J'ai vu le loup le renard et la belette chanter !!!
 
-J'ai vu le loup, le renard et la belette.. 
-J'ai vu le loup le renard et la belette chanter !!!!
+\begin{equation}
+(a+b)^3=(a+b)(a+b)^2
+\label{moneq}
+\end{equation}
+
+## autre chapitre
+
+Toujours plein de choses bizarres par ici 
+
+## Encore un autre.. 
+
+De ci de là tout évolue dans un foisonnement dignes des débuts de l'univers.. 
+Le bric à brac dans ce coin du désert perdu du Namikwaï était indescriptible.. 

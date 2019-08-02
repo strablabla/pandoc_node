@@ -9,6 +9,19 @@ var re = require('./static/js/read_emit');
 var modify = require('./static/js/modify_html');
 const exec = require('child_process').exec;
 
+//-------------- Addresses
+
+// var folder_template = 'article_3' //'bare_jrnl' //'wen'
+// var name_template = 'article_3.tex' //'bare_jrnl.tex' //'wen_template.tex'
+
+// var folder_template = 'wen'
+// var name_template = 'wen_template.tex'
+
+var folder_template = 'eisvogel'
+var name_template = 'eisvogel.tex'
+
+// var folder_template = 'mich'
+// var name_template = 'mich.tex'
 
 //--------------  Server
 
@@ -86,14 +99,14 @@ io.sockets.on('connection', function (socket) {
       //-------------------------------- From textarea to html
 
       socket.on('return', function(new_text) {        // change html with textarea
-            modify.modify_html_with_newtext(io, fs, util, new_text)
-            //var code = 'pandoc -N --template=template.tex --variable mainfont="Palatino" --variable sansfont="Helvetica" --variable monofont="Menlo" --variable fontsize=12pt --variable version=2.0 views/main.txt --pdf-engine=pdflatex --toc -o example14.pdf'
-            var code = 'cd latex_templates/{}; pandoc -N  --template={}\
-                        --variable mainfont="Palatino" --variable sansfont="Helvetica" \
-                        --variable monofont="Menlo" --variable fontsize=12pt\
-                        --variable version=2.0 ../../views/main.txt  --toc\
-                        -o ../../views/result_pandoc.pdf'.format('wen', 'wen_template.tex')
-            exec_code(code)
+              modify.modify_html_with_newtext(io, fs, util, new_text)
+              //var code = 'pandoc -N --template=template.tex --variable mainfont="Palatino" --variable sansfont="Helvetica" --variable monofont="Menlo" --variable fontsize=12pt --variable version=2.0 views/main.txt --pdf-engine=pdflatex --toc -o example14.pdf'
+              var code = 'cd latex_templates/{}; pandoc -N  --template={}\
+                          --variable mainfont="Palatino" --variable sansfont="Helvetica" \
+                          --variable monofont="Menlo" --variable fontsize=12pt\
+                          --variable version=2.0 ../../views/main.txt  --toc\
+                          -o ../../views/result_pandoc.pdf'.format(folder_template, name_template)
+              exec_code(code)  // Execute Pandoc code..
         }); // end socket.on return
 
       socket.on('scroll', function(pattern) { patt = pattern })
@@ -101,7 +114,7 @@ io.sockets.on('connection', function (socket) {
 
 }); // sockets.on connection
 
-var port = 3000
+var port = 3083
 var host = '127.0.0.1'
 server.listen(port, host);
 var addr = 'http://{}'.format(host) + ':{}/'.format(port) // access through 192.168.0.13..
