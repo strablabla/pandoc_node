@@ -15,7 +15,7 @@ const exec = require('child_process').exec;
 // var name_template = 'article_3.tex' //'bare_jrnl.tex' //'wen_template.tex'
 
 // var folder_template = 'wen'
-// var name_template = 'wen_template.tex'
+// var name_template = 'wen.tex'
 
 var folder_template = 'eisvogel'
 var name_template = 'eisvogel.tex'
@@ -95,7 +95,11 @@ io.sockets.on('connection', function (socket) {
           }); // end fs.readFile
       util.save_regularly() // save the regularly the text..
       socket.on('join', function(data) { socket.emit('scroll', patt) }); // end socket.on join
-
+      socket.on('template',function(temp){
+              console.log(temp)
+              folder_template = temp
+              name_template = temp+'.tex'
+      })
       //-------------------------------- From textarea to html
 
       socket.on('return', function(new_text) {        // change html with textarea

@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -45,6 +44,9 @@
 
 .show {display: block;}
 </style>
+
+<script src="/socket.io/socket.io.js"></script>
+
 </head>
 <body>
 
@@ -53,9 +55,8 @@
 <div class="dropdown">
   <button onclick="myFunction()" class="dropbtn">Choix du modèle</button>
   <div id="myDropdown" class="dropdown-content">
-    <a id='m1' href="#m1"> modèle 1 </a>
-    <a href="#m2"> modèle 2 </a>
-    <a href="#m3"> modèle 3 </a>
+    <a class='temp' id='wen' > wen </a>
+    <a class='temp' id='eisvogel'> eisvogel </a>
   </div>
 </div>
 
@@ -68,6 +69,10 @@
 <script>
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
+
+
+var socket = io.connect();
+
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -91,8 +96,9 @@ $('#text').click(function(){
       window.location.href = 'text';
 })
 
-// $('#m1').click(function(){
-//       window.location.href = 'text';
-// })
+
+$('.temp').click(function(){
+      socket.emit('template', this.id );
+})
 
 </script>
