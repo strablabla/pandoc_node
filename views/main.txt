@@ -1,9 +1,7 @@
-
----
 title: L'histoire ne fait que commencer
 author: Le bigre Dumpy
 date: 3 juin 2019
-abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce maximus nisi ligula. 
+abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce maximus nisi ligula.
 ---
 
 # Introduction
@@ -26,9 +24,23 @@ J'ai vu le loup le renard et la belette chanter !!!
 
 ## autre chapitre
 
-Toujours plein de choses bizarres par ici 
+Toujours plein de choses bizarres par ici
 
 ## Encore un autre.. oooo
 
-De ci de là tout évolue dans un foisonnement dignes des débuts de l'univers.. 
-Le bric à brac dans ce coin du désert perdu du Namikwaï était indescriptible.. 
+De ci de là tout évolue dans un foisonnement dignes des débuts de l'univers..
+Le bric à brac dans ce coin du désert perdu du Namikwaï était indescriptible..
+
+## autre chapitre
+
+hehe
+
+## autre chapitre après aure chapitre
+
+L'effet boomerang est l'effet le plus étonnant..
+
+## Parès plein d'autres chapitre en voici un nouveau..
+
+De part l'aspect rétrospectif du cycle introspectif du langage débridé de cet auteur habité d'un esprit de dérision
+qui frise l'anormalité dans les qualités synchrones des idées symplectiques, il apparaît que
+l'ensemble de ce qui est supposé est au-dessus de ce qu'on l'habitude de voir.. 

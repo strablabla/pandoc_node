@@ -96,9 +96,9 @@ $('#text').click(function(){
       window.location.href = 'text';
 })
 
-
 $('.temp').click(function(){
-      socket.emit('template', this.id );
+      socket.emit('template', this.id ); // send which template to use to the server..
+      //window.location.href = ''
 })
 
 </script>
