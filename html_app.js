@@ -86,6 +86,17 @@ String.prototype.format = function () {
     });
 };
 
+function new_pdf(folder_template, name_template, socket){         // create a new pdf with pandoc and template..
+
+      var code = 'cd latex_templates/{}; pandoc -N  --template={}\
+                  --variable mainfont="Palatino" --variable sansfont="Helvetica" \
+                  --variable monofont="Menlo" --variable fontsize=12pt\
+                  --variable version=2.0 ../../views/main.txt  --toc\
+                  -o ../../views/result_pandoc.pdf'.format(folder_template, name_template)
+      exec_code(code)  // Execute Pandoc code..
+      setTimeout(function(){socket.emit('page_return_to_html','')},1000)
+}
+
 io.sockets.on('connection', function (socket) {
 
       console.log('A client is connected!');
@@ -98,19 +109,17 @@ io.sockets.on('connection', function (socket) {
       socket.on('template',function(temp){
               console.log(temp)
               folder_template = temp
-              name_template = temp+'.tex'
+              name_template = temp + '.tex'
+              new_pdf(folder_template, name_template, socket)
+              //socket.emit('page_return_to_html','')
       })
+
       //-------------------------------- From textarea to html
 
       socket.on('return', function(new_text) {        // change html with textarea
               modify.modify_html_with_newtext(io, fs, util, new_text)
               //var code = 'pandoc -N --template=template.tex --variable mainfont="Palatino" --variable sansfont="Helvetica" --variable monofont="Menlo" --variable fontsize=12pt --variable version=2.0 views/main.txt --pdf-engine=pdflatex --toc -o example14.pdf'
-              var code = 'cd latex_templates/{}; pandoc -N  --template={}\
-                          --variable mainfont="Palatino" --variable sansfont="Helvetica" \
-                          --variable monofont="Menlo" --variable fontsize=12pt\
-                          --variable version=2.0 ../../views/main.txt  --toc\
-                          -o ../../views/result_pandoc.pdf'.format(folder_template, name_template)
-              exec_code(code)  // Execute Pandoc code..
+              new_pdf(folder_template, name_template, socket)
         }); // end socket.on return
 
       socket.on('scroll', function(pattern) { patt = pattern })

@@ -16,14 +16,16 @@ socket.on('scroll_html', function(pos) {
  });
 
  socket.on('page_return_to_html', function() {
-       window.location.reload()
+       // alert('reloading the page !!! ')
+       // window.location.reload()
+       setTimeout(function(){window.location.reload()},1500)
   });
 
 // ------------- Double click for switching to textarea
 
 var dic_modes_switch = { '.date': 1, 'li li': 0,
                          'li:not(:has(span))': 0} //,'h1':0,'h2':0}
-                          // switch to text in case of date, double list, list must not have span.. 
+                          // switch to text in case of date, double list, list must not have span..
 
 Object.entries(dic_modes_switch).forEach(([elem,i]) =>
         dblclick_to_text(socket, $(elem), i)

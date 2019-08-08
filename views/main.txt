@@ -1,3 +1,4 @@
+---
 title: L'histoire ne fait que commencer
 author: Le bigre Dumpy
 date: 3 juin 2019
@@ -39,8 +40,10 @@ hehe
 
 L'effet boomerang est l'effet le plus étonnant..
 
-## Parès plein d'autres chapitre en voici un nouveau..
+## Après plein d'autres chapitre en voici un nouveau..
 
 De part l'aspect rétrospectif du cycle introspectif du langage débridé de cet auteur habité d'un esprit de dérision
 qui frise l'anormalité dans les qualités synchrones des idées symplectiques, il apparaît que
-l'ensemble de ce qui est supposé est au-dessus de ce qu'on l'habitude de voir.. 
+l'ensemble de ce qui est supposé est au-dessus de ce qu'on l'habitude de voir..
+
+## Old chap..
