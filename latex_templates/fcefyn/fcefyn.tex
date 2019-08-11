@@ -1,0 +1,108 @@
+%% This is file FCEFyN-paper.tex is the template file for publications
+%% in the "Revista de la Facultad de Ciencias Exactas, Físicas y Naturales
+%% de la Universidad Nacional de Córdoba, Argentina,
+%% https://revistas.unc.edu.ar/index.php/FCEFyN.
+%% This file was originally written by Gustavo J. Krause.
+%% First revision: 2018-07-17
+%% Second revision: 2018-07-26 by Mariano Lizarraga (minor modifications)
+%%
+%% History:
+%%           2018-07-20  First version by Gustavo Krause
+%%
+
+% Opciones específicas:
+%     esp:   Idioma español (por defecto)
+%     eng:   Idioma inglés
+%     por:   Idioma portugués
+%     blind: Se compila la versión para revisores (se ocultan datos de los autores)
+
+
+\documentclass[esp]{FCEFyN-class}
+%
+% Título de la publicación
+
+$if(title)$
+\title{$title$}
+$endif$
+
+% Título corto para el encabezado (copiar el título principal si no resulta demasiado largo)
+\shorttitle{Instrucciones para autores de la Revista de la FCEFyN}
+       
+
+\author{$for(author)$$author$$sep$\\$endfor$}
+$if(date)$
+\date{$date$}
+$endif$
+
+% Afiliaciones de los autores
+\affil[1]{Nombre de Departamento o Instituto,
+Nombre Universidad, Provincia o Estado, País}
+\affil[2]{(Otro) Nombre de Departamento o Instituto,
+Nombre Universidad, Provincia o Estado, País}
+\affil[3]{(Otro) Nombre de Departamento o Instituto,
+Nombre Universidad, Provincia o Estado, País}
+
+% Apellido del primer autor del trabajo
+\firstauthor{Apellido}
+
+% Datos del autor de contacto
+\contactauthor{Nombre A. Apellido}           % Nombre y apellido del autor de contacto
+\email{nombre.apellido@email.com}            % Correo electrónico del autor de contacto
+\mailingaddress{Dirección postal completa}   % Dirección postal completa
+\phonenumber{1234-5678 int. 123}             % Número de teléfono
+
+% Datos de la publicación (serán definidas en la edición)
+\thisvolume{XX}
+\thisnumber{XX}
+\thismonth{MES}
+\thisyear{20XX}
+\receptiondate{dd/mm/aaaa}
+\acceptancedate{dd/mm/aaaa}
+\publicationdate{dd/mm/aaaa}
+
+
+% Coloque aquí sus definiciones particulares
+\newcommand{\vect}[1]{\mathbf{#1}}  % vectores
+
+
+% Iniciar documento
+\begin{document}
+
+% Introduzca aquí el resumen en español (o en portugués si utiliza la opción [por])
+\resumen{
+Este documento brinda una plantilla para la preparación de trabajos originales que desean ser
+publicados en la Revista de la Facultad de Ciencias Exactas, Físicas y Naturales de la Universidad
+Nacional de Córdoba, Argentina.
+Se recomienda que el resumen contenga entre 150 y 200 palabras en un solo párrafo, donde deben
+resumirse el contexto, la motivación, la metodología empleada, los aportes más originales, los
+resultados y las conclusiones de su trabajo.
+No deben incluirse citas bibliográficas y se recomienda no introducir acrónimos ni fórmulas en el
+resumen o en el título. No haga referencias a figuras o a tablas. Como recomendación general, escriba
+su artículo insertando y eliminado texto a partir de este documento. De esta forma, le será más fácil
+respetar los estilos predefinidos.}
+
+% Introduzca aquí las palabras clave en español (o en portugués si utiliza la opción [por])
+\palabrasclave{
+Primera palabra o frase clave, segunda palabra o frase clave, tercera palabra o frase clave. 
+(Coloque entre tres y seis palabras o frases clave separadas por coma, las cuales representan la
+temática de su trabajo)}
+
+% Insert here the abstract in English language
+\abstract{$abstract$}
+
+% Insert here the keywords of your work in English language
+\keywords{
+Translate to English the same words and phrases written above.}
+
+% Incluir título, autores, resumen, etc.
+\maketitle
+\thispagestyle{fancy}
+\printcontactdata
+
+$body$
+
+% Incluir las referencias
+\insertbibliography{Referencias.bib}
+
+\end{document}
+

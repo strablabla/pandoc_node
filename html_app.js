@@ -11,17 +11,9 @@ const exec = require('child_process').exec;
 
 //-------------- Addresses
 
-// var folder_template = 'article_3' //'bare_jrnl' //'wen'
-// var name_template = 'article_3.tex' //'bare_jrnl.tex' //'wen_template.tex'
-
-// var folder_template = 'wen'
-// var name_template = 'wen.tex'
 
 var folder_template = 'eisvogel'
 var name_template = 'eisvogel.tex'
-
-// var folder_template = 'mich'
-// var name_template = 'mich.tex'
 
 //--------------  Server
 

@@ -736,7 +736,23 @@ $endif$
 $if(title)$
 \title{$title$}
 $endif$
-\author{$for(author)$$author$$sep$\\$endfor$}
+
+
+%\author{$for(author)$$author$$sep$\\$endfor$}
+
+\author{$for(author)$ 
+              $if(author.name)$ $author.name$ \\
+              $if(author.affiliation)$ $author.affiliation$ \\
+              $if(author.address)$ $author.address$ \\
+              $if(author.email)$ email:$author.email$ \\
+            $endif$ 
+            $endif$
+            $endif$
+            $else$ 
+            $author$ $endif$ 
+        $endfor$}
+
+
 $if(date)$
 \date{$date$}
 $endif$
