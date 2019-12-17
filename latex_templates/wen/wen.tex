@@ -33,20 +33,22 @@ $if(title)$
 \title{$title$}
 $endif$
 
+$for(author)$
+$if(author.name)$
+\author{
+            $author.name$
+            $if(author.affiliation)$ \affiliation{$author.affiliation$}$endif$
+            $if(author.address)$ $author.address$
 
-%\author{$for(author)$$author$$sep$\\$endfor$}
+          $else$
+          $author$
+         $endif$
 
-\author{$for(author)$ 
-              $if(author.name)$ $author.name$ \\
-              $if(author.affiliation)$ $author.affiliation$ \\
-              $if(author.address)$ $author.address$ \\
-              $if(author.email)$ email:$author.email$ \\
-            $endif$ 
-            $endif$
-            $endif$
-            $else$ 
-            $author$ $endif$ 
-        $endfor$}
+        }
+$endif$
+$endfor$
+
+
 
 $if(date)$
 \date{$date$}

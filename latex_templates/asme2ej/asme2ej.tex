@@ -19,6 +19,8 @@
 %%% use twocolumn and 10pt options with the asme2ej format
 \documentclass[twocolumn,10pt]{asme2ej}
 
+\usepackage{amsmath}
+
 \usepackage{epsfig} %% for loading postscript figures
 
 %% The class has several options
@@ -29,8 +31,10 @@
 %  cleanfoot - take out copyright info in footer leave page number
 %  cleanhead - take out the conference banner on the title page
 %  titlepage/notitlepage - put in titlepage or leave out titlepage
-%  
+%
 %% The default is oneside, onecolumn, 10pt, final
+
+
 
 
 $if(title)$
@@ -42,32 +46,31 @@ $endif$
 $for(author)$
 $if(author.name)$
 \author{
-            $author.name$ 
-              $if(author.affiliation)$ \affiliation{$author.affiliation$} 
-              $if(author.address)$ $author.address$ 
-              $if(author.email)$ $author.email$
-            
+            $author.name$
+            $if(author.affiliation)$ \affiliation{$author.affiliation$}
+            $if(author.address)$ $author.address$
+            $if(author.email)$ $author.email$
             $endif$
             $endif$
-            $else$ 
-            $author$ 
-           $endif$ 
-            
+          $else$
+          $author$
+         $endif$
+
         }
-$endif$ 
+$endif$
 $endfor$
 
 
 \begin{document}
 
-\maketitle    
+\maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 {\it This is the abstract.
 
 $abstract$
- 
+
 }
 \end{abstract}
 
@@ -81,9 +84,9 @@ $body$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{acknowledgment}
-ASME Technical Publications provided the format specifications for the Journal of Mechanical Design, though they are not easy to reproduce.  It is their commitment to ensuring quality figures in every issue of JMD that motivates this effort to have authors review the presentation of their figures.  
+ASME Technical Publications provided the format specifications for the Journal of Mechanical Design, though they are not easy to reproduce.  It is their commitment to ensuring quality figures in every issue of JMD that motivates this effort to have authors review the presentation of their figures.
 
-Thanks go to D. E. Knuth and L. Lamport for developing the wonderful word processing software packages \TeX\ and \LaTeX. We would like to thank Ken Sprott, Kirk van Katwyk, and Matt Campbell for fixing bugs in the ASME style file \verb+asme2ej.cls+, and Geoff Shiflett for creating 
+Thanks go to D. E. Knuth and L. Lamport for developing the wonderful word processing software packages \TeX\ and \LaTeX. We would like to thank Ken Sprott, Kirk van Katwyk, and Matt Campbell for fixing bugs in the ASME style file \verb+asme2ej.cls+, and Geoff Shiflett for creating
 ASME bibliography stype file \verb+asmems4.bst+.
 \end{acknowledgment}
 
@@ -103,7 +106,7 @@ ASME bibliography stype file \verb+asmems4.bst+.
 % \end{thebibliography}
 
 % Here's where you specify the bibliography style file.
-% The full file name for the bibliography style file 
+% The full file name for the bibliography style file
 % used for an ASME paper is asmems4.bst.
 \bibliographystyle{asmems4}
 

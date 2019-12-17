@@ -6,12 +6,12 @@ author:
     affiliation: |
       Professor, Fellow of ASME \
       Integration Engineering Laboratory \
-      Department of Mechanical Engineering \ 
+      Department of Mechanical Engineering \
     address  : |
       University of California \
-      Davis, California 95616 \
+      Davis, California 95616
     email : hhcheng@ucdavis.edu
-    
+
   - name: "Grim le Rouge"
     affiliation: |
       Professor, of nothing \
@@ -20,37 +20,56 @@ author:
     address  : |
       University of BigFruit \
       Davis, California 9331600000
-      
-   
+
+  - name: "Diana Krubjj"
+    affiliation: |
+      Professor, of nothing \
+      CHemistry Laboratory \
+      Department of Boomboom of nowhere \
+    address   : |
+      University of Zingaw\
+      Davison, California 11100000
+
+
+  - name: "aa Krubjj"
+    affiliation: |
+      Professor, of nothing \
+      CHemistry Laboratory \
+      Department of Boomboom of nowhere
+    address : |
+      University of aa\
+      Davison, California 11100000
+
+
 affiliation:
  - id  : "1"
    institution: "Wilhelm-Wundt-University"
-   
+
 date: 3 juin 2019
-abstract: 
+abstract:
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec,
   ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a,
-  semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, 
-  enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. 
+  semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie,
+  enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper.
   Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue.
   Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue.
   Praesent egestas leo in pede. Praesent blandit odio eu enim.
   Pellentesque sed dui ut augue blandit sodales.
   Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-  Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. 
+  Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum.
   Maecenas adipiscing ante non diam sodales hendrerit. \
   Ut velit mauris, egestas sed, gravida nec, ornare ut, mi.
   Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin.
-  Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, 
+  Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh,
   in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue.
-  Integer id felis. Curabitur aliquet pellentesque diam. 
+  Integer id felis. Curabitur aliquet pellentesque diam.
   Integer quis metus vitae elit lobortis egestas.
-  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-  Morbi vel erat non mauris convallis vehicula. Nulla et sapien. 
-  Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. 
+  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+  Morbi vel erat non mauris convallis vehicula. Nulla et sapien.
+  Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam.
   Mauris ullamcorper felis vitae erat. Proin feugiat, augue non elementum posuere,
-  metus purus iaculis lectus, et tristique ligula justo vitae magna. 
+  metus purus iaculis lectus, et tristique ligula justo vitae magna.
 ---
 
 # Introduction

@@ -84,6 +84,7 @@ function new_pdf(folder_template, name_template, socket){         // create a ne
                   --variable mainfont="Palatino" --variable sansfont="Helvetica" \
                   --variable monofont="Menlo" --variable fontsize=12pt\
                   --variable version=2.0 ../../views/main.txt  --toc\
+                  --data-dir=../../figure \
                   -o ../../views/result_pandoc.pdf'.format(folder_template, name_template)
       exec_code(code)  // Execute Pandoc code..
       setTimeout(function(){socket.emit('page_return_to_html','')},1000)

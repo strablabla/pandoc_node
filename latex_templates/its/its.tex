@@ -1,0 +1,39 @@
+\documentclass[a4paper,10pt,twoside]{article}
+\usepackage{its_conf}
+
+
+$if(title)$
+\title{$title$}
+$endif$
+
+$for(author)$
+$if(author.name)$
+\author{
+            $author.name$
+            $if(author.affiliation)$ \affiliation{$author.affiliation$}$endif$
+            $if(author.address)$ $author.address$
+
+          $else$
+          $author$
+         $endif$
+
+        }
+$endif$
+$endfor$
+
+
+\begin{document}
+\setcounter{section}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{equation}{0}
+\setcounter{secnumdepth}{1}
+\setcounter{secnumdepth}{1}
+
+
+$body$
+
+
+
+
+\end{document}
