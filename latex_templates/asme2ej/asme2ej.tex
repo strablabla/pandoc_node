@@ -19,7 +19,19 @@
 %%% use twocolumn and 10pt options with the asme2ej format
 \documentclass[twocolumn,10pt]{asme2ej}
 
-\usepackage{amsmath}
+%\usepackage{amsmath}
+\usepackage{mathtools}
+
+%http://www.bertera.it/overwriting-latex-image-positioning-in-pandoc-generated-pdf.html
+% Overwrite \begin{figure}[htbp] with \begin{figure}[H]
+\usepackage{float}
+\let\origfigure=\figure
+\let\endorigfigure=\endfigure
+\renewenvironment{figure}[1][]{%
+   \origfigure[H]
+}{%
+   \endorigfigure
+}
 
 \usepackage{epsfig} %% for loading postscript figures
 
