@@ -1,0 +1,117 @@
+<!-- <script src="/socket.io/socket.io.js"></script> -->
+
+<script>
+
+String.prototype.format = function () {
+  var i = 0, args = arguments;
+  return this.replace(/{}/g, function () {
+    return typeof args[i] != 'undefined' ? args[i++] : '';
+  });
+};
+
+var count_pdf = 0;
+var count_pdf_insocket = 0;
+var current_li = {}
+var addr_relat = []
+var root_addr = {}
+toggle_pdf_ok = false
+
+$('li').each(function(){
+
+    /*
+    Make the list of pdfs..
+    Replace !fold by the list in question..
+    */
+
+    var reg = /\!fold/
+    var reginside = /\!inside/
+    var fullreg = /\!fold.+\!inside/
+    var txt = $(this).html().split('\n')[0]
+    if ( txt.match(fullreg) ){
+          //$(this).css({'color':'#ffb3d9'})
+          current_li[count_pdf] = $(this)
+          var addr = txt.split('!fold')[1].split('!inside')[0].trim()
+          addroot = addr
+          addr_short = addr.split('/').slice(1).join('/')
+          addr_relat[count_pdf] = relative_addr(addr,addr_short)
+          root_addr[count_pdf] = addr.split(addr_relat[count_pdf])[0]
+          count_pdf += 1;
+          var count = count_pdf-1
+          addr_sent = addr + '§§' + count
+          socket.emit('list_folders', addr + '§§' + count)
+          socket.on('list_folders',function(strap_addr){
+                var current_count = parseInt(strap_addr.split('§§')[0])
+                strap_addr = strap_addr.split('§§')[1]
+                var list_folders = strap_addr.split('\n').slice(0,-1) // list of the folders..
+                make_code_folder(strap_addr, addr_relat, list_folders, current_count)
+                if ( current_count == Object.keys(addr_relat).length-1 & !toggle_pdf_ok){
+                    toggle_pdf()            // when clicking on - or + open or close..
+                    toggle_pdf_ok = true
+                    //css({'color':'#ffe6f2'})
+                    //$('.funf').parent().parent().parent().css({'color':'#ffe6f2'})
+                    $('.funf').click(function(){
+                        $(this).parent().next().toggle()
+                    })
+                    socket.emit('make_elems', '')
+                }
+            })
+
+        } // if text.match
+
+  })
+
+function make_code_folder(strap_addr, addr_relat, list_folders, current_count, ul_folders){
+      var ul_folders = $('<ul/>').text("\n")
+      for (i in list_folders){
+            var titli = $('<li/>').html(list_folders[i] + '\n <a><span class="funf"> [-]</span></a>') // funf class fold unfold
+            ul_folders.append(titli) //
+            var sentence = '!fold ' + root_addr[current_count] + addr_relat[current_count] + '/' + list_folders[i] +'\n' // +'\n' root[current_count]
+            var curr_li = $('<li/>').text(sentence)
+            var last_ul = $('<ul/>').toggle()
+            titli.append(last_ul.append(curr_li))
+          } // end for
+      var currparpar = current_li[current_count].parent().parent()
+      currparpar.append($('<span/>').text('[-]').addClass('togpdf'))
+      currparpar.append(ul_folders.hide()).css({'color':'#ff9966'}) // #ff9966 #476b6b
+      current_li[current_count].parent().remove()
+      //toggle_pdf()
+
+}
+
+function toggle_pdf(){
+
+    /*
+    Code for closing, opening the pdfs..
+    */
+
+    //alert('toggle !!!')
+    $('.togpdf').click(function(){
+            var taga = $(this).find('a')
+            if (taga.text() == ' [-]'){
+                taga.text(' [+]')
+            }
+            else{ taga.text(' [-]') }
+            $(this).next().toggle()
+        })
+}
+
+function relative_addr(addr, addr_short){
+
+      /*
+      Relative address, address used in the html code
+      */
+
+      try {
+        var reg = /\.{2}\/\w+.+\//     // pattern ../aaa
+        root = addr.match(reg)[0]      // root
+        addr = addr.split(root)[1]     // remove the root
+      }
+      catch{
+        //alert('...nothing found...')
+        addr = addr_short
+      }
+      return addr
+}
+
+
+</script>

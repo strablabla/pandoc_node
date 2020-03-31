@@ -3,8 +3,15 @@
 
 {% include 'dropdown.html' %}
 
-<embed src="pdf" type="application/pdf" width="100%" height="600px" />
+<!-- sandbox='allow-scripts allow-same-origin' -->
+<iframe class='synctxt' src="html" id="html" name='html'  width="50%" height="600px" style="margin-left:50px; margin-right:50px"></iframe>
+<!-- <embed src="pdf" id="pdf" type="application/pdf" width="40%" height="600px" name='pdf'/> -->
+<iframe class='synctxt' src="pdf" id="pdf" name='pdf'  width="40%" height="600px"  ></iframe>
+
+<br><br><br><br>
+
 
 {% include 'voice_toc.html' %}
+{% include 'interact.html' %}
 {% include 'scroll_socket.html' %}
 {% include 'end.html' %}

@@ -1,3 +1,4 @@
+const https = require('https')
 var express = require('express')
 var path = require("path");
 var open = require('open');
@@ -6,19 +7,25 @@ var nunjucks  = require('nunjucks');
 var count = require('./static/js/count_lines');
 var util = require('./static/js/util');
 var re = require('./static/js/read_emit');
+var init = require('./static/js/init');
 var modify = require('./static/js/modify_html');
 const exec = require('child_process').exec;
 
 //-------------- Addresses
-
 
 var folder_template = 'eisvogel'
 var name_template = 'eisvogel.tex'
 
 //--------------  Server
 
+const options = {
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('server.crt')
+};
+
 var app = express()
-var server = require('http').createServer(app);
+var server =  https.createServer(options, app)
+//var server = http.createServer(app);
 
 nunjucks.configure('views', {
     autoescape: true,
@@ -29,6 +36,8 @@ nunjucks.configure('views', {
 
 app.get('/', function(req, res){ res.render('strap_small.html'); });
 app.get('/text', function(req, res){ res.render('text.html'); });
+app.get('/html', function(req, res){ res.render('strap_small0.html'); });
+//app.get('/result', function(req, res){ res.render('strap_small1.html'); });
 
 app.get('/pdf', function (req, res) {
     var filePath = path.join(__dirname, 'views', "result_pandoc.pdf");
@@ -41,9 +50,7 @@ app.get('/pdf', function (req, res) {
 
 //--------------  static addresses
 
-app.use(express.static('public'));
-app.use(express.static('scripts'));
-app.use(express.static('lib'));
+init.static_addr(app,express)
 
 function exec_code(code) {
 
@@ -120,9 +127,10 @@ io.sockets.on('connection', function (socket) {
 
 }); // sockets.on connection
 
+
 var port = 3083
-var host = '127.0.0.1'
+var host = '0.0.0.0' // 127.0.0.1
 server.listen(port, host);
-var addr = 'http://{}'.format(host) + ':{}/'.format(port) // access through 192.168.0.13..
+var addr = 'https://{}'.format(host) + ':{}/'.format(port) // access through 192.168.0.13..
 console.log('Server running at {}'.format(addr));
-open(addr,"node-strap");
+open(addr,"node-pandoc");

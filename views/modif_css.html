@@ -1,0 +1,109 @@
+
+<style>
+
+@font-face {
+    font-family: 'walt';
+    src: url('Waltograph/waltograph42.otf');
+}
+
+@font-face {
+    font-family: 'grund';
+    src: url('grundschrift/Grundschrift-Bold.otf');
+}
+
+@font-face {
+    font-family: 'optype';
+    src: url('OpenType-TT/19076.ttf');
+}
+
+@font-face {
+    font-family: 'caglio';
+    src: url('Cagliostro-regular/Cagliostro-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'garam';
+    src: url('BetterEBGaramond-Regular/BetterEBGaramond-Regular-v0.1.otf');
+}
+
+@font-face {
+    font-family: 'alex';
+    src: url('Alexander/Alexander.ttf');
+}
+
+@font-face {
+    font-family: 'autopia';
+    src: url('Autopia-TTF-v1.1/Autopia-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'museum';
+    src: url('museum/MuseumBible.ttf');
+}
+
+@font-face {
+    font-family: 'libre_carlson_display';
+    src: url('Libre-Caslon-Display/LibreCaslonDisplay-Regular.otf');
+}
+
+
+@font-face {
+    font-family: 'libre_carlson_text';
+    src: url('Libre-Caslon-Text-master/LibreCaslonText-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'bagnard';
+    src: url('Bagnard-Sans-master/BagnardSans.otf');
+}
+
+@font-face {
+    font-family: 'GentiumPlus';
+    src: url('GentiumPlus-5.000/GentiumPlus-I.ttf');
+}
+
+@font-face {
+    font-family: 'Sniglet';
+    src: url('Sniglet v2/Sniglet-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'butler';
+    src: url('Sniglet v2/');
+}
+
+
+</style>
+
+<script>
+
+//Grundschrift-Bold.otf    Grundschrift-Light.otf  Grundschrift-Regular.otf
+//Grundschrift-Kontur.otf  Grundschrift-Punkt.otf
+
+$('h1').css({'font-family': "libre_carlson_display",'text-align':'left', 'font-size':'20px', 'text-shadow':'none'}) // 0086b3 e64d00 40bf40 c65353 ff4d4d
+$('h2').css({'color':'#c65353', 'font-family': "libre_carlson_display", 'font-size':'15px', '-webkit-text-stroke-width': '0.5px'}) // 0086b3 e64d00 40bf40 c65353 ff4d4d 1a75ff b3d1ff ff3333 ff9999 8cb3d9
+$('h3').css({'color':'#d27979', 'font-family': "libre_carlson_display", 'font-style': 'bold', '-webkit-text-stroke-width': '0.2px'}) // 'Enriqueta', serif
+$('p').css({'font-size':'12px'})
+$('#toc').css({ 'width':'auto !important', 'font-size':'14px' })
+$('.navbar').hide()
+
+$('#toc').click(function(){
+   alert('bigoooggggggggooo !!!')
+   //top.pdf.scrollTop(200)
+
+   //$('#pdf').contents().scrollTop(200)
+   var ifrm = parent.document.getElementById('pdf');
+   // //ifrm.contentWindow.scrollTo(100,200)
+   // ifrm.contentWindow.scrollTo( 0, 999999 );
+   // var frameDoc = ifrm.contentWindow.document;
+   // frameDoc.documentElement.style.overflow = '100px';
+   ifrm.body.scrollTop = 1000
+   //ifrm.scrollTop = 100
+   //var ht = ifrm.style.height = '100px';
+
+   //$('#pdf').scrollTop(100)
+})
+
+MathLive.renderMathInDocument();
+
+</script>

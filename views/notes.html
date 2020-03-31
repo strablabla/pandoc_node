@@ -1,0 +1,337 @@
+<script src="keymaster.js"></script>
+
+
+<script>
+
+function date_full(){
+
+      /*
+
+      Build the text full date
+      Return year, month, day, hour, minute, sec
+
+      */
+
+      var date = new Date()
+      var sec = date.getSeconds();
+      var minute = date.getMinutes();
+      var hour = date.getHours();
+      var day = date.getDate();
+      var month = date.getMonth()+1;
+      var year = date.getFullYear();
+      var txt_date = [year, month, day, hour, minute, sec].join('_').slice(2)
+
+      return ' ' + txt_date
+
+}
+
+var currelem
+
+function fill_note(elem, id, postop){
+
+      /*
+
+      Dynamically build textarea and button..
+
+      */
+
+      var butt_reduce = $('<input/>').attr({
+               type: "button",
+               id: "reduce_note",
+               value: "-",
+               class: "btn btn-warning",
+               style: "padding: 1px 6px;"
+           });
+      butt_reduce.css({"position":"absolute", "top":"8px","left":"10px"})
+
+      var butt_save = $('<input/>').attr({
+               type: "button",
+               id: "save_note",
+               value: "save",
+               class: "btn btn-warning"
+           });
+      var textarea = $('<textarea id="text_note" rows="5" cols="43" style=" width: 306px; height: 108px;" /> ')
+      var title = $('<h1/>').addClass('note_title')
+      title.css({'font-size':'12px', 'box-shadow': '0 0px 0px'})
+      elem.append(title) // .css({'font-size':'20px'})
+      elem.append(textarea)
+      elem.append(butt_save)
+      elem.append(butt_reduce)
+      $('#text_note').show()
+      butt_save.click(function(){            // send note to server..
+          var posdate = ' !id ' + id +  date_full()
+          var txt = $('#text_note').val() + posdate
+          socket.emit('save_note', txt)
+          $('#note').hide()
+      })
+      butt_reduce.click(function(){            // send note to server..
+          $('#text_note').toggle()
+          if($("#text_note").is(":visible")){
+                $('#note').css({'height':'250px'})
+                $('#note').css({'width':'350px'})
+                butt_save.show()
+                title.show()
+            } else{
+                $('#note').css({'height':'40px'}) // reduced size height
+                $('#note').css({'width':'5px'})  // reduced size width
+                butt_save.hide()
+                title.hide()
+            }
+      })
+
+
+}
+
+function note_in_strap(elem, id, postop){
+
+      /*
+
+      Note template
+
+      */
+
+      posnote = postop.toString() + 'px' // note position
+
+      elem.css({'background-color':'rgb(255,224,102)',
+                'padding-left': '20px',
+                'padding-right': '20px',
+                'padding-bottom': '20px',
+                'padding-top': '10px',
+                'margin-right': '20px',
+                'margin-left': '20px',
+                'box-shadow': '0.5em 0.5em 0.7em',
+                'position': 'absolute',
+                'left': '50px',
+                'top': posnote,
+                'width': '350px',
+                'height': '250px',
+                'max-height': '300px',
+                //'font-size': '85%',
+                'z-index': '3',
+                'color': 'black'
+                })
+      elem.draggable()
+      elem.empty()
+      fill_note(elem, id, postop)
+
+}
+
+function show_note(id, postop){
+
+      /*
+
+      */
+
+      note_in_strap($('#note'), id, postop)
+
+}
+
+//var new_note = false;
+socket.on('create_new_note', function(){ // create new note by voice command..
+
+      /*
+
+      */
+
+      var elem = $(':hover').last()
+      id = create_id(elem)
+      var postop = Math.round(elem.offset().top,1)  || 0;
+      show_note(id, postop)
+
+})
+
+function create_id(elem){
+
+      /*
+
+      */
+
+      if (elem.attr('href')){
+          var id = elem.attr('href')
+      }
+      else if (elem.attr('data')){
+          var id = elem.attr('data')
+      }
+      else if (elem.attr('src')){
+          var id = elem.attr('src')
+      }
+      else if (elem.parent().hasClass('youtube')){
+          var id = elem.parent().attr('id')
+      }
+
+    return id
+}
+
+function deal_with_note(key,value,elem,action){
+
+  /*
+
+  */
+
+  elem.css({"text-decoration":action})
+  if (! note_hidden){
+     $('#note').show()
+  }
+  $('#note').offset({'top' : elem.offset().top})
+  $('.note_title').text('Note : ' + value.split('!date')[1])
+  $('#text_note').val(value.split('!date')[0])
+  //alert(value.split('!date')[0])
+  bind_save_butt(key)
+  currelem = elem
+
+}
+
+function handle_note(key,value,elem){
+
+      /*
+
+      */
+      //.button:link{ text-decoration:none }
+      elem.hover(function(){
+          //alert('hover is ok')
+          if (currelem != elem){
+              //alert("new note")
+              try{
+                 currelem.css({"text-decoration":'none'}) // remove underlline
+              }catch(err){} // alert('first elem')
+
+          }
+          deal_with_note(key,value,elem,"underline")
+      })
+
+}
+
+function bind_save_butt(key){
+
+      /*
+
+      */
+
+      $('#save_note').unbind()
+      $('#save_note').click(function(){
+            var posdate = ' !id ' + key + date_full() // Math.round(,1)
+            var txt = $('#text_note').val() + posdate
+            //alert(txt)
+            socket.emit('save_note', txt)
+            $('#note').hide()
+      })
+}
+
+function detect_note(key, value){
+
+      /*
+
+      */
+
+      $('.embed_pdf').each(function(){
+        var txt = $(this).text()
+        try{
+            //var keysplit = key.trim().split('/')[1].split(' ')[0].trim()
+            var keysplit = key.trim().split('/')[1].split('#zoom=')[0].trim().split('.pdf?')[0]
+            if (keysplit != ''){
+                if (txt.search(keysplit) != -1){
+                  handle_note(key,value,$(this))
+                  }
+             }
+          }catch(err){}
+
+      }) // embed.each
+
+      $('a').each(function(){
+        var txt = $(this).attr('href')
+        if (txt){
+          if (txt.search(key) != -1){
+                handle_note(key,value,$(this))
+             } // end hover..
+          } // if txt
+      }) // each href
+
+      $('object').each(function(){
+          var type = $(this).attr('type')
+          //alert(type)
+          if (type == 'application/pdf'){
+             //alert('founddddd')
+             var txt = $(this).attr('data')
+             //alert(txt)
+             if (txt.search(key) != -1){
+                   //alert(txt)
+                   // alert(key)
+                   // alert(value)
+                   handle_note(key,value,$(this).parent())
+                } // end hover..
+          } // if type is application/pdf
+      }) // each object
+
+      $('.youtube').each(function(){     // note for straptoc youtube..
+        var txt = $(this).attr('id')
+        if (txt){
+          if (txt.search(key) != -1){
+                handle_note(key,value,$(this))
+             } // end hover..
+          } // if txt
+      }) //
+
+} // detect_note
+
+key('alt+c',function(){
+
+      /*
+
+      Create a new note
+
+      */
+
+      var elem = $(':hover').last()
+      id = create_id(elem)
+      var postop = Math.round(elem.offset().top,1)  || 0;
+      show_note(id, postop)
+
+})
+
+function active_template(notes){
+
+      /*
+
+
+      */
+
+      var elem = $(':hover').last()
+      var first_key = Object.keys(notes)[0]
+      var id = first_key
+      var postop = Math.round(elem.offset().top,1)  || 0;
+      show_note(id, postop)
+      $('#note').hide()
+
+}
+
+note_activated = false
+note_hidden = false
+key('alt+n',function(){                           // trigger all the notes..
+
+      /*
+
+      Load and show the notes
+
+      */
+
+      if (note_activated){
+        $('#note').toggle()
+        note_hidden = !note_hidden
+      }else{
+            socket.emit('ask_notes','')
+            socket.on('all_notes', function(txt){
+               var notes = JSON.parse(txt)
+
+               $.each(notes, function(key, value) {
+                     detect_note(key, value)
+               });
+               active_template(notes)
+               note_activated = true
+
+            })
+      }
+
+})
+
+
+</script>

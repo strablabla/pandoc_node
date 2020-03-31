@@ -1,0 +1,41 @@
+
+
+<script src="scrollsync.js"></script>
+
+<script>
+
+// $(document).ready(function()
+// {
+// $("#html").scroll(function () {
+//         $("#pdf").scrollTop($("#html").scrollTop());
+//         $("#pdf").scrollLeft($("#html").scrollLeft());
+//     });
+// $("#pdf").scroll(function () {
+//         $("#html").scrollTop($("#pdf").scrollTop());
+//         $("#html").scrollLeft($("#pdf").scrollLeft());
+//     });
+//
+// });
+
+
+// window.onscroll = function()
+// {
+// frames.html.document.documentElement.scrollTop = window.pageYOffset;
+// frames.html.document.body.scrollTop = window.pageYOffset; // Google Chrome, Safari, documents without valid doctype
+//
+// frames.pdf.document.documentElement.scrollTop = window.pageYOffset;
+// frames.pdf.document.body.scrollTop = window.pageYOffset; // Google Chrome, Safari, documents without valid doctype
+//
+// }
+
+$(document).ready(function(){
+    //$('.container').scrollsync();
+    $('.synctxt').scrollsync({
+      x_sync: true,
+      y_sync: true
+    });
+
+});
+
+
+</script>

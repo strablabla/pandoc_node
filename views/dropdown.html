@@ -1,7 +1,9 @@
 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
+
 .dropbtn {
   background-color: #3498DB;
   color: white;
@@ -17,7 +19,8 @@
 }
 
 .dropdown {
-  position: relative;
+  position: absolute;
+  right: 250px;
   display: inline-block;
 }
 
@@ -43,16 +46,22 @@
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
 </style>
 
 <script src="/socket.io/socket.io.js"></script>
 
 </head>
+
 <body>
+
+<br><br><br><br>
 
 <center><h2 >Pandoc to pdf</h2></center>
 
-<div class="dropdown">
+<br><br><br><br><br>
+
+<div class="dropdown" >
   <button onclick="myFunction()" class="dropbtn">Choix du modèle</button>
   <div id="myDropdown" class="dropdown-content">
     <a class='temp' id='wen' > wen </a>
@@ -63,7 +72,10 @@
   </div>
 </div>
 
-<button id="text" class="alert alert-success"> Texte </button>
+<br><br>
+
+<!-- <button id="text" class="alert alert-success"> Texte </button> -->
+<button id="scroll" class="alert alert-success"> Scroll </button>
 <a id='gototext' href="text" hidden> </a>
 
 <br>
@@ -95,13 +107,24 @@ window.onclick = function(event) {
   }
 }
 
-$('#text').click(function(){
-      window.location.href = 'text';
+$('#scroll').click(function(){
+
+      //$('#pdf').scrollTop(100)
+      var ifrm = document.getElementById('pdf');
+      ifrm.scrollTop = 200;
+      //ifrm.contentWindow.scrollTo(100,200);
+      ifrm.scrollTo(100,200);
+      ifrm.style.height = '100px';
+      alert('scrolling !!!')
 })
 
 $('.temp').click(function(){
       socket.emit('template', this.id ); // send which template to use to the server..
       //window.location.href = ''
 })
+
+// $('#pdf').click(function(){
+//       window.location.href = '';
+// })
 
 </script>
