@@ -76,9 +76,9 @@
 
 <!-- <button id="text" class="alert alert-success"> Texte </button> -->
 <button id="scroll" class="alert alert-success"> Scroll </button>
-<!-- <button id="scroll" class="alert alert-success"> Scroll </button>
-<button id="scroll" class="alert alert-success"> Scroll </button>
-<button id="scroll" class="alert alert-success"> Scroll </button> -->
+<button id="html_only" class="alert alert-success"> html_only </button>
+<button id="pdf_only" class="alert alert-success"> pdf_only </button>
+<button id="both_html_pdf" class="alert alert-success"> both_html_pdf </button>
 <a id='gototext' href="text" hidden> </a>
 
 <br>
@@ -119,6 +119,29 @@ $('#scroll').click(function(){
       ifrm.scrollTo(100,200);
       ifrm.style.height = '100px';
       alert('scrolling !!!')
+})
+
+var full_width_ifrm = '90%'
+
+$('#html_only').click(function(){
+
+      $('#html').show().css({'width':full_width_ifrm})
+      $('#pdf').hide()
+
+})
+
+$('#pdf_only').click(function(){
+
+      $('#html').hide()
+      $('#pdf').show().css({'width': full_width_ifrm})
+
+})
+
+$('#both_html_pdf').click(function(){
+
+      $('#html').show().css({'width':'45%'})
+      $('#pdf').show().css({'width':'45%'})
+
 })
 
 $('.temp').click(function(){
