@@ -11,12 +11,12 @@
 <script src="codemirror.js"></script>
 <link rel="stylesheet" href="highlight.css">
 {% include 'textarea.html' %}
- <script src="/socket.io/socket.io.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 
  <script>
 
     var socket = io.connect();  //'http://localhost:3000'
-    var comment = false;
+    var comment = false; // for debugging
     var scroll_html_pos = 0
     var pattern = ''
 
@@ -26,7 +26,7 @@
             var json_line_patt = JSON.parse(code);
             line_number = json_line_patt['line']
             var patt = json_line_patt['pattern']
-            if (comment){ alert('line_number is : '+ line_number) }
+            if (comment){ alert( 'line_number is : ' + line_number ) }
 
             //-------------------------- CodeMirror
 
@@ -39,13 +39,13 @@
 
              //------------- from textarea to html
 
-             $('#submit').click(function(){               // submit new text.. from text to html
+             $('#submit').click(function(){                    // submit new text.. from text to html
                    var new_text = editor.getValue()
                    socket.emit('return', new_text);
                  }) // end click
       })
 
-    socket.on('scroll_html', function(pos) {  // save html position of scroll
+    socket.on('scroll_html', function(pos) {                    // save html position of scroll
             scroll_html_pos = pos
             if (comment){ alert(' scroll_html pos = ' + pos) }
       })

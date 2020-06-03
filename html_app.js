@@ -13,8 +13,10 @@ const exec = require('child_process').exec;
 
 //-------------- Addresses
 
-var folder_template = 'eisvogel'
-var name_template = 'eisvogel.tex'
+// var folder_template = 'eisvogel'
+// var name_template = 'eisvogel.tex'
+var folder_template = 'asme2ej'
+var name_template = 'asme2ej.tex'
 
 //--------------  Server
 

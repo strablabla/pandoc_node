@@ -15,6 +15,7 @@ exports.find_line_of_pattern = function(text, pattern){
       var tot_lines = 0
       var astring = text.split('\n')
       var count = true
+      console.log("in count lines pattern is " + pattern )
       astring.forEach(function (line, number) {
 
           if( line.match(pattern) == null & count){

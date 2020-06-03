@@ -24,7 +24,7 @@ socket.on('scroll_html', function(pos) {
 // ------------- Double click for switching to textarea
 
 var dic_modes_switch = { '.date': 1, 'li li': 0,
-                         'li:not(:has(span))': 0, 'p':0} //,'h1':0,'h2':0}
+                         'li:not(:has(span))': 0, 'p': 0 } //,'h1':0,'h2':0}
                           // switch to text in case of date, double list, list must not have span..
 
 Object.entries(dic_modes_switch).forEach(([elem,i]) =>
