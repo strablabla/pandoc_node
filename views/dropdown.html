@@ -55,28 +55,31 @@
 
 <body>
 
-<br><br><br><br>
 
-<center><h2 >Pandoc to pdf</h2></center>
+
+  <!-- A grey horizontal navbar that becomes vertical on small screens -->
+<nav class="navbar navbar-expand-sm bg-light" style="box-shadow: 10px 5px 5px black;">
+
+</nav>
 
 <br><br><br>
 
-<div class="dropdown" >
-  <button onclick="myFunction()" class="dropbtn">Choix du modèle</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a class='temp' id='wen' > wen </a>
-    <a class='temp' id='eisvogel'> eisvogel </a>
-    <a class='temp' id='asme2ej'> asme2ej </a>
-    <a class='temp' id='its'> its </a>
-    <a class='temp' id='bmvc'> bmvc </a>
+<div class="dropdown" style="position:absolute;left:50%;" >
+  <button id="butt_template" onclick="myFunction()" class="dropbtn" > Choix du modèle </button>
+  <div id="template_choice" class="dropdown-content">
+      <a class='temp' id='wen' > wen </a>
+      <a class='temp' id='eisvogel'> eisvogel </a>
+      <a class='temp' id='asme2ej'> asme2ej </a>
+      <a class='temp' id='its'> its </a>
+      <a class='temp' id='bmvc'> bmvc </a>
   </div>
 </div>
 
 <br>
 
 <!-- <button id="text" class="alert alert-success"> Texte </button> -->
-<button id="scroll" class="alert alert-success"> Scroll </button>
-<button id="html_only" class="alert alert-success"> html_only </button>
+<!-- <button id="scroll" class="alert alert-success"> Scroll </button> -->
+<button id="html_only" class="alert alert-success" style="margin-left:100px;"> html_only </button>
 <button id="pdf_only" class="alert alert-success"> pdf_only </button>
 <button id="both_html_pdf" class="alert alert-success"> both_html_pdf </button>
 <a id='gototext' href="text" hidden> </a>
@@ -92,7 +95,7 @@ toggle between hiding and showing the dropdown content */
 var socket = io.connect();
 
 function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
+  document.getElementById("template_choice").classList.toggle("show");
 }
 
 // Close the dropdown if the user clicks outside of it
@@ -110,22 +113,22 @@ window.onclick = function(event) {
   }
 }
 
-$('#scroll').click(function(){
-
-      //$('#pdf').scrollTop(100)
-      var ifrm = document.getElementById('pdf');
-      ifrm.scrollTop = 200;
-      //ifrm.contentWindow.scrollTo(100,200);
-      ifrm.scrollTo(100,200);
-      ifrm.style.height = '100px';
-      alert('scrolling !!!')
-})
+// $('#scroll').click(function(){
+//
+//       //$('#pdf').scrollTop(100)
+//       var ifrm = document.getElementById('pdf');
+//       ifrm.scrollTop = 200;
+//       //ifrm.contentWindow.scrollTo(100,200);
+//       ifrm.scrollTo(100,200);
+//       ifrm.style.height = '100px';
+//       alert('scrolling !!!')
+// })
 
 var full_width_ifrm = '90%'
 
 $('#html_only').click(function(){
 
-      $('#html').show().css({'width':full_width_ifrm})
+      $('#html').show().css({'margin-left':'100px','margin-right':'100px','width':full_width_ifrm})
       $('#pdf').hide()
 
 })
@@ -133,20 +136,21 @@ $('#html_only').click(function(){
 $('#pdf_only').click(function(){
 
       $('#html').hide()
-      $('#pdf').show().css({'width': full_width_ifrm})
+      $('#pdf').show().css({'margin-left':'100px','margin-right':'100px','width': full_width_ifrm})
 
 })
 
 $('#both_html_pdf').click(function(){
 
-      $('#html').show().css({'width':'45%'})
-      $('#pdf').show().css({'width':'45%'})
+      $('#html').show().css({'margin-left':'100px','margin-right':'10px','width':'45%'})
+      $('#pdf').show().css({'margin-left':'0px','margin-right':'10px','width':'45%'})
 
 })
 
 $('.temp').click(function(){
       socket.emit('template', this.id ); // send which template to use to the server..
       //window.location.href = ''
+      $('#butt_template').text(this.id)
 })
 
 // $('#pdf').click(function(){

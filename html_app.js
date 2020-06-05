@@ -108,7 +108,7 @@ io.sockets.on('connection', function (socket) {
           }); // end fs.readFile
       util.save_regularly() // save the regularly the text..
       socket.on('join', function(data) { socket.emit('scroll', patt) }); // end socket.on join
-      socket.on('template',function(temp){
+      socket.on('template', function(temp){
               console.log(temp)
               folder_template = temp
               name_template = temp + '.tex'
