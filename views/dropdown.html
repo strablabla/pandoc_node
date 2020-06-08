@@ -55,14 +55,12 @@
 
 <body>
 
-
-
   <!-- A grey horizontal navbar that becomes vertical on small screens -->
 <nav class="navbar navbar-expand-sm bg-light" style="box-shadow: 10px 5px 5px black;">
 
 </nav>
 
-<br><br><br>
+<br>
 
 <div class="dropdown" style="position:absolute;left:50%;" >
   <button id="butt_template" onclick="myFunction()" class="dropbtn" > Choix du modèle </button>
@@ -84,7 +82,6 @@
 <button id="both_html_pdf" class="alert alert-success"> both_html_pdf </button>
 <a id='gototext' href="text" hidden> </a>
 
-<br>
 <br>
 
 <script>
@@ -130,6 +127,7 @@ $('#html_only').click(function(){
 
       $('#html').show().css({'margin-left':'100px','margin-right':'100px','width':full_width_ifrm})
       $('#pdf').hide()
+      $("#html").contents().find("p").css({'font-size':'12px', 'line-height':'100%'})
 
 })
 
@@ -144,6 +142,7 @@ $('#both_html_pdf').click(function(){
 
       $('#html').show().css({'margin-left':'100px','margin-right':'10px','width':'45%'})
       $('#pdf').show().css({'margin-left':'0px','margin-right':'10px','width':'45%'})
+      $("#html").contents().find("p").css({'font-size':'10px', 'line-height':'80%'})
 
 })
 

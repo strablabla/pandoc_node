@@ -6,19 +6,25 @@ Utilities
 
 var fs = require('fs');
 
-function make_date(){
+function make_date(depth){
 
       /*
-      Build the text date
+
+      Build the text date,
+      year, month, day, hour, minute, sec
+      depth = 6 --> goes to the seconds..
+
       */
 
       var date = new Date()
+      var sec = date.getSeconds();
       var minute = date.getMinutes();
       var hour = date.getHours();
       var day = date.getDate();
-      var month = date.getMonth();
+      var month = date.getMonth()+1;
       var year = date.getFullYear();
-      var txt_date = [year, month, day, hour, minute].join('_')
+      var txt_date = [year, month, day, hour, minute, sec]
+      txt_date = txt_date.slice(0,depth).join('_')
 
       return txt_date
 
@@ -31,7 +37,7 @@ exports.save_current_version = function(data,with_date){
       */
 
       var basename = 'views/saved/main_old'
-      txt_date = make_date()
+      txt_date = make_date(4)
       if ( with_date ){
           var namefile = basename + '_' + txt_date + ".html"
           list_saved.push(txt_date)
@@ -53,9 +59,9 @@ exports.save_regularly = function(){
       Saving regularly views/main.html
       */
 
-      list_saved = []     // global
-      lim_nb_saved = 10   // max versions saved
-      var min_interv = 5  // intervall in minute
+      list_saved = []        // global
+      lim_nb_saved = 3       // max versions saved
+      var min_interv = 15    // interval in minute
       setInterval(function() {
               fs.readFile('views/main.html', 'utf8', function (err,data) {
                       if (err) { return console.log(err); }
