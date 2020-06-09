@@ -2,52 +2,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
 
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  margin-left: 50px;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
-}
-
-.dropdown {
-  position: absolute;
-  right: 250px;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  margin-left: 50px;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-
-}
-
-.dropdown a:hover {background-color: #ddd;}
-
-.show {display: block;}
-
-</style>
 
 <script src="/socket.io/socket.io.js"></script>
 
@@ -55,15 +10,12 @@
 
 <body>
 
-  <!-- A grey horizontal navbar that becomes vertical on small screens -->
-<nav class="navbar navbar-expand-sm bg-light" style="box-shadow: 10px 5px 5px black;">
 
-</nav>
 
 <br>
 
-<div class="dropdown" style="position:absolute;left:50%;" >
-  <button id="butt_template" onclick="myFunction()" class="dropbtn" > Choix du modèle </button>
+<div class="dropdown" style="position:fixed; right:100px; top:3px" >
+  <button id="butt_template" onclick="which_template()" class="dropbtn" > Choix du modèle </button>
   <div id="template_choice" class="dropdown-content">
       <a class='temp' id='wen' > wen </a>
       <a class='temp' id='eisvogel'> eisvogel </a>
@@ -77,9 +29,7 @@
 
 <!-- <button id="text" class="alert alert-success"> Texte </button> -->
 <!-- <button id="scroll" class="alert alert-success"> Scroll </button> -->
-<button id="html_only" class="alert alert-success" style="margin-left:100px;"> html_only </button>
-<button id="pdf_only" class="alert alert-success"> pdf_only </button>
-<button id="both_html_pdf" class="alert alert-success"> both_html_pdf </button>
+
 <a id='gototext' href="text" hidden> </a>
 
 <br>
@@ -91,7 +41,7 @@ toggle between hiding and showing the dropdown content */
 
 var socket = io.connect();
 
-function myFunction() {
+function which_template() {
   document.getElementById("template_choice").classList.toggle("show");
 }
 
@@ -123,28 +73,7 @@ window.onclick = function(event) {
 
 var full_width_ifrm = '90%'
 
-$('#html_only').click(function(){
 
-      $('#html').show().css({'margin-left':'100px','margin-right':'100px','width':full_width_ifrm})
-      $('#pdf').hide()
-      $("#html").contents().find("p").css({'font-size':'12px', 'line-height':'100%'})
-
-})
-
-$('#pdf_only').click(function(){
-
-      $('#html').hide()
-      $('#pdf').show().css({'margin-left':'100px','margin-right':'100px','width': full_width_ifrm})
-
-})
-
-$('#both_html_pdf').click(function(){
-
-      $('#html').show().css({'margin-left':'100px','margin-right':'10px','width':'45%'})
-      $('#pdf').show().css({'margin-left':'0px','margin-right':'10px','width':'45%'})
-      $("#html").contents().find("p").css({'font-size':'10px', 'line-height':'80%'})
-
-})
 
 $('.temp').click(function(){
       socket.emit('template', this.id ); // send which template to use to the server..

@@ -1,0 +1,109 @@
+
+<style>
+
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-left: 50px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: absolute;
+  right: 250px;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  margin-left: 50px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+</style>
+
+<!-- A grey horizontal navbar that becomes vertical on small screens -->
+<!-- <div class="container">  navbar-expand-->
+<nav id="main_navbar" class="navbar fixed-top -sm bg-light" style="box-shadow: 10px 5px 5px black; "></nav>
+<!-- </div> -->
+
+<div class="dropdown" style="position:fixed; right:280px; top:3px" >
+  <button id="butt_dispo" onclick="show_dispo()" class="dropbtn" > dispo pages </button>
+  <div id="dispo_pages" class="dropdown-content">
+      <a  id='html_only' > html </a>
+      <a  id='pdf_only'> pdf </a>
+      <a  id='both_html_pdf'> html & pdf </a>
+  </div>
+</div>
+
+<script>
+
+  $('#main_navbar').css({'position':'fixed', 'width':'100%'}) // , 'z-index':'10'
+
+$('#html_only').click(function(){
+
+      $('#html').show().css({'margin-left':'100px','margin-right':'100px','width':full_width_ifrm})
+      $('#pdf').hide()
+      $("#html").contents().find("p").css({'font-size':'13px', 'line-height':'110%'})
+
+})
+
+$('#pdf_only').click(function(){
+
+      $('#html').hide()
+      $('#pdf').show().css({'margin-left':'100px','margin-right':'100px','width': full_width_ifrm})
+
+})
+
+$('#both_html_pdf').click(function(){
+
+      $('#html').show().css({'margin-left':'100px','margin-right':'10px','width':'45%'})
+      $('#pdf').show().css({'margin-left':'0px','margin-right':'10px','width':'45%'})
+      $("#html").contents().find("p").css({'font-size':'13px', 'line-height':'110%'})
+
+})
+
+function show_dispo() {
+  document.getElementById("dispo_pages").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    //alert(event.target)
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+</script>

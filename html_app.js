@@ -4,12 +4,15 @@ var path = require("path");
 var open = require('open');
 var fs = require('fs');
 var nunjucks  = require('nunjucks');
+
+//----------
+
 var count = require('./static/js/count_lines');
 var util = require('./static/js/util');
 var re = require('./static/js/read_emit');
 var init = require('./static/js/init');
 var modify = require('./static/js/modify_html');
-const exec = require('child_process').exec;
+var pan = require('./static/js/pandoc_exec');
 
 //-------------- Addresses
 
@@ -54,23 +57,6 @@ app.get('/pdf', function (req, res) {
 
 init.static_addr(app,express)
 
-function exec_code(code) {
-
-      /*
-      Execute code in the shell console..
-      */
-
-      exec(code, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`exec error: ${error}`);
-        return;
-      }
-      console.log(`stdout: ${stdout}`);
-      console.log(`stderr: ${stderr}`);
-    });
-
-}
-
 //--------------  websocket
 
 // Loading socket.io
@@ -87,18 +73,6 @@ String.prototype.format = function () {
     });
 };
 
-function new_pdf(folder_template, name_template, socket){         // create a new pdf with pandoc and template..
-
-      var code = 'cd latex_templates/{}; pandoc -N  --template={}\
-                  --variable mainfont="Palatino" --variable sansfont="Helvetica" \
-                  --variable monofont="Menlo" --variable fontsize=12pt\
-                  --variable version=2.0 ../../views/main.txt  --toc\
-                  --data-dir=../../figure \
-                  -o ../../views/result_pandoc.pdf'.format(folder_template, name_template)
-      exec_code(code)  // Execute Pandoc code..
-      setTimeout(function(){socket.emit('page_return_to_html','')},1000)
-}
-
 io.sockets.on('connection', function (socket) {
 
       console.log('A client is connected!');
@@ -112,7 +86,7 @@ io.sockets.on('connection', function (socket) {
               console.log(temp)
               folder_template = temp
               name_template = temp + '.tex'
-              new_pdf(folder_template, name_template, socket)
+              pan.new_pdf(folder_template, name_template, socket)
               //socket.emit('page_return_to_html','')
       })
 
@@ -121,7 +95,7 @@ io.sockets.on('connection', function (socket) {
       socket.on('return', function(new_text) {        // change html with textarea
               modify.modify_html_with_newtext(io, fs, util, new_text)
               //var code = 'pandoc -N --template=template.tex --variable mainfont="Palatino" --variable sansfont="Helvetica" --variable monofont="Menlo" --variable fontsize=12pt --variable version=2.0 views/main.txt --pdf-engine=pdflatex --toc -o example14.pdf'
-              new_pdf(folder_template, name_template, socket)
+              pan.new_pdf(folder_template, name_template, socket)
         }); // end socket.on return
 
       socket.on('scroll', function(pattern) { patt = pattern })
