@@ -41,8 +41,7 @@ nunjucks.configure('views', {
 
 app.get('/', function(req, res){ res.render('strap_small.html'); });
 app.get('/text', function(req, res){ res.render('text.html'); });
-app.get('/html', function(req, res){ res.render('strap_small0.html'); });
-//app.get('/result', function(req, res){ res.render('strap_small1.html'); });
+app.get('/html', function(req, res){ res.render('part_html.html'); });
 
 app.get('/pdf', function (req, res) {
     var filePath = path.join(__dirname, 'views', "result_pandoc.pdf");

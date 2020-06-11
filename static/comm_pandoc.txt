@@ -1,0 +1,6 @@
+cd latex_templates/{}; pandoc -N  --template={}\
+       --variable mainfont="Palatino" --variable sansfont="Helvetica" \
+       --variable monofont="Menlo" --variable fontsize=12pt\
+       --variable version=2.0 ../../views/main.txt  --toc\
+       --data-dir=../../figure \
+       -o ../../views/result_pandoc.pdf

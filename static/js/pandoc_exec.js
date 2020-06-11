@@ -1,4 +1,5 @@
 const exec = require('child_process').exec;
+var fs = require('fs');
 
 exec_code = function (code) {
 
@@ -19,12 +20,12 @@ exec_code = function (code) {
 
 exports.new_pdf = function(folder_template, name_template, socket){         // create a new pdf with pandoc and template..
 
-      var code = 'cd latex_templates/{}; pandoc -N  --template={}\
-                  --variable mainfont="Palatino" --variable sansfont="Helvetica" \
-                  --variable monofont="Menlo" --variable fontsize=12pt\
-                  --variable version=2.0 ../../views/main.txt  --toc\
-                  --data-dir=../../figure \
-                  -o ../../views/result_pandoc.pdf'.format(folder_template, name_template)
-      exec_code(code)  // Execute Pandoc code..
-      setTimeout(function(){socket.emit('page_return_to_html','')},1000)
+      fs.readFile('static/comm_pandoc.txt', 'utf8', function (err,text) {
+               if (err) { return console.log(err); }
+               var code = text.format(folder_template, name_template)
+               exec_code(code)  // Execute Pandoc code..
+
+          }); // end fs.readFile
+
+      setTimeout(function(){socket.emit('page_return_to_html','')}, 1000)
 }
